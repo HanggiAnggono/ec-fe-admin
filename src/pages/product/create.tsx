@@ -1,7 +1,7 @@
 import { useNavigation } from "@refinedev/core";
 import { useForm } from "@refinedev/react-hook-form";
 
-export const CategoryEdit = () => {
+export const CategoryCreate = () => {
   const { list } = useNavigation();
 
   const {
@@ -9,12 +9,12 @@ export const CategoryEdit = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({});
 
   return (
     <div style={{ padding: "16px" }}>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <h1>Edit</h1>
+        <h1>Create</h1>
         <div>
           <button
             onClick={() => {

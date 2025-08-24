@@ -27,6 +27,7 @@ import {
 import { ForgotPassword } from "./pages/forgotPassword";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
+import { ProductList } from "./pages/product";
 
 function App() {
   return (
@@ -44,6 +45,16 @@ function App() {
                 create: "/product-category/create",
                 edit: "/product-category/edit/:id",
                 show: "/product-category/show/:id",
+                meta: {
+                  canDelete: true,
+                },
+              },
+              {
+                name: "products",
+                list: "/products",
+                create: "/products/create",
+                edit: "/products/edit/:id",
+                show: "/products/show/:id",
                 meta: {
                   canDelete: true,
                 },
@@ -75,6 +86,12 @@ function App() {
                 />
                 <Route path="/product-category">
                   <Route index element={<CategoryList />} />
+                  <Route path="create" element={<CategoryCreate />} />
+                  <Route path="edit/:id" element={<CategoryEdit />} />
+                  <Route path="show/:id" element={<CategoryShow />} />
+                </Route>
+                <Route path="/products">
+                  <Route index element={<ProductList />} />
                   <Route path="create" element={<CategoryCreate />} />
                   <Route path="edit/:id" element={<CategoryEdit />} />
                   <Route path="show/:id" element={<CategoryShow />} />
