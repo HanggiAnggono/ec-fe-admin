@@ -1,10 +1,11 @@
-import { useNavigation } from "@refinedev/core";
+import { Link, useNavigation } from "@refinedev/core";
 import { useTable } from "@refinedev/react-table";
 import { type ColumnDef, flexRender } from "@tanstack/react-table";
 import React from "react";
+import { IProduct } from "../../modules/product/dto";
 
 export const ProductList = () => {
-  const columns = React.useMemo<ColumnDef<any>[]>(
+  const columns = React.useMemo<ColumnDef<IProduct>[]>(
     () => [
       {
         id: "id",
@@ -20,6 +21,24 @@ export const ProductList = () => {
         id: "description",
         accessorKey: "description",
         header: "Description",
+      },
+      {
+        id: "categoryName",
+        accessorKey: "category.name",
+        header: "Category",
+        cell: function render({ getValue, row }) {
+          return (
+            <span>
+              {getValue() ? (
+                <Link to={`/product-category/show/${row.original.category.id}`}>
+                  {getValue() as string}
+                </Link>
+              ) : (
+                "-"
+              )}
+            </span>
+          );
+        },
       },
       {
         id: "actions",
@@ -91,7 +110,7 @@ export const ProductList = () => {
           justifyContent: "space-between",
         }}
       >
-        <h1>List</h1>
+        <h1>Product List</h1>
         <button onClick={() => create("products")}>Create</button>
       </div>
       <div style={{ maxWidth: "100%", overflowY: "scroll" }}>
