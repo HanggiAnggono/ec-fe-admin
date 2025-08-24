@@ -1,7 +1,7 @@
 import { useNavigation } from "@refinedev/core";
 import { useForm } from "@refinedev/react-hook-form";
 
-export const CategoryEdit = () => {
+export const CategoryCreate = () => {
   const { list } = useNavigation();
 
   const {
@@ -14,7 +14,7 @@ export const CategoryEdit = () => {
   return (
     <div style={{ padding: "16px" }}>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <h1>Edit</h1>
+        <h1>Create</h1>
         <div>
           <button
             onClick={() => {
@@ -34,17 +34,31 @@ export const CategoryEdit = () => {
           }}
         >
           <label>
-            <span style={{ marginRight: "8px" }}>Title</span>
+            <div style={{ marginRight: "8px" }}>Name</div>
             <input
               type="text"
-              {...register("title", {
+              className="rounded-md p-1"
+              {...register("name", {
                 required: "This field is required",
               })}
             />
             <span style={{ color: "red" }}>
-              {(errors as any)?.title?.message as string}
+              {(errors as any)?.name?.message as string}
             </span>
           </label>
+
+          <label>
+            <div style={{ marginRight: "8px" }}>Description</div>
+            <textarea
+              rows={10}
+              className="border-2 rounded-md p-1"
+              {...register("description")}
+            />
+            <span style={{ color: "red" }}>
+              {(errors as any)?.description?.message as string}
+            </span>
+          </label>
+
           <div>
             <input type="submit" value="Save" />
           </div>

@@ -1,9 +1,9 @@
-import { type GetManyResponse, useMany, useNavigation } from "@refinedev/core";
+import { useNavigation } from "@refinedev/core";
 import { useTable } from "@refinedev/react-table";
 import { type ColumnDef, flexRender } from "@tanstack/react-table";
 import React from "react";
 
-export const BlogPostList = () => {
+export const CategoryList = () => {
   const columns = React.useMemo<ColumnDef<any>[]>(
     () => [
       {
@@ -12,49 +12,14 @@ export const BlogPostList = () => {
         header: "ID",
       },
       {
-        id: "title",
-        accessorKey: "title",
-        header: "Title",
+        id: "name",
+        accessorKey: "name",
+        header: "Name",
       },
       {
-        id: "content",
-        accessorKey: "content",
-        header: "Content",
-      },
-      {
-        id: "category",
-        header: "Category",
-        accessorKey: "category",
-        cell: function render({ getValue, table }) {
-          const meta = table.options.meta as {
-            categoryData: GetManyResponse;
-          };
-
-          try {
-            const category = meta.categoryData?.data?.find(
-              (item) => item.id == getValue<any>()?.id
-            );
-
-            return category?.title ?? "Loading...";
-          } catch (error) {
-            return null;
-          }
-        },
-      },
-      {
-        id: "status",
-        accessorKey: "status",
-        header: "Status",
-      },
-      {
-        id: "createdAt",
-        accessorKey: "createdAt",
-        header: "Created At",
-        cell: function render({ getValue }) {
-          return new Date(getValue<any>()).toLocaleString(undefined, {
-            timeZone: "UTC",
-          });
-        },
+        id: "description",
+        accessorKey: "description",
+        header: "Description",
       },
       {
         id: "actions",
@@ -72,14 +37,14 @@ export const BlogPostList = () => {
             >
               <button
                 onClick={() => {
-                  show("blog_posts", getValue() as string);
+                  show("product-category", getValue() as string);
                 }}
               >
                 Show
               </button>
               <button
                 onClick={() => {
-                  edit("blog_posts", getValue() as string);
+                  edit("product-category", getValue() as string);
                 }}
               >
                 Edit
@@ -98,9 +63,6 @@ export const BlogPostList = () => {
     getHeaderGroups,
     getRowModel,
     setOptions,
-    refineCore: {
-      tableQueryResult: { data: tableData },
-    },
     getState,
     setPageIndex,
     getCanPreviousPage,
@@ -113,20 +75,10 @@ export const BlogPostList = () => {
     columns,
   });
 
-  const { data: categoryData } = useMany({
-    resource: "categories",
-    ids:
-      tableData?.data?.map((item) => item?.category?.id).filter(Boolean) ?? [],
-    queryOptions: {
-      enabled: !!tableData?.data,
-    },
-  });
-
   setOptions((prev) => ({
     ...prev,
     meta: {
       ...prev.meta,
-      categoryData,
     },
   }));
 
@@ -139,8 +91,8 @@ export const BlogPostList = () => {
           justifyContent: "space-between",
         }}
       >
-        <h1>{"List"}</h1>
-        <button onClick={() => create("blog_posts")}>{"Create"}</button>
+        <h1>List</h1>
+        <button onClick={() => create("product-category")}>Create</button>
       </div>
       <div style={{ maxWidth: "100%", overflowY: "scroll" }}>
         <table>
@@ -198,7 +150,7 @@ export const BlogPostList = () => {
           </strong>
         </span>
         <span>
-          | {"Go"}:{" "}
+          | Go:{" "}
           <input
             type="number"
             defaultValue={getState().pagination.pageIndex + 1}
@@ -216,7 +168,7 @@ export const BlogPostList = () => {
         >
           {[10, 20, 30, 40, 50].map((pageSize) => (
             <option key={pageSize} value={pageSize}>
-              {"Show"} {pageSize}
+              Show {pageSize}
             </option>
           ))}
         </select>

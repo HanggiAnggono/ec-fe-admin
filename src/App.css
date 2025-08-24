@@ -102,3 +102,44 @@
     @apply pl-4;
   }
 }
+
+/* apply tailwind to button */
+@layer components {
+  button, input[type="submit"] {
+    @apply bg-slate-700 text-white px-2 py-1 rounded hover:bg-slate-800;
+  }
+
+  .button-secondary {
+    @apply bg-gray-300 text-black px-2 py-1 rounded hover:bg-gray-400;
+  }
+
+  .button-danger {
+    @apply bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600;
+  }
+
+  table {
+    @apply w-full rounded-lg border-none;
+
+    thead {
+      @apply bg-slate-400 text-white overflow-hidden;
+
+      th {
+        @apply border-none
+      }
+    }
+
+    tr {
+      @apply hover:bg-gray-100 border-none ;
+
+      &:nth-child(even) {
+        @apply bg-gray-100;
+      }
+    }
+
+    td {
+      @apply border-none;
+    }
+  }
+
+
+}

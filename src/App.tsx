@@ -19,17 +19,11 @@ import "./App.css";
 import { authProvider } from "./authProvider";
 import { Layout } from "./components/layout";
 import {
-  BlogPostCreate,
-  BlogPostEdit,
-  BlogPostList,
-  BlogPostShow,
-} from "./pages/blog-posts";
-import {
   CategoryCreate,
   CategoryEdit,
   CategoryList,
   CategoryShow,
-} from "./pages/categories";
+} from "./pages/product-category";
 import { ForgotPassword } from "./pages/forgotPassword";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
@@ -37,30 +31,19 @@ import { Register } from "./pages/register";
 function App() {
   return (
     <BrowserRouter>
-      <GitHubBanner />
       <RefineKbarProvider>
         <DevtoolsProvider>
           <Refine
-            dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
+            dataProvider={dataProvider("http://localhost:3000")}
             routerProvider={routerBindings}
             authProvider={authProvider}
             resources={[
               {
-                name: "blog_posts",
-                list: "/blog-posts",
-                create: "/blog-posts/create",
-                edit: "/blog-posts/edit/:id",
-                show: "/blog-posts/show/:id",
-                meta: {
-                  canDelete: true,
-                },
-              },
-              {
-                name: "categories",
-                list: "/categories",
-                create: "/categories/create",
-                edit: "/categories/edit/:id",
-                show: "/categories/show/:id",
+                name: "product-category",
+                list: "/product-category",
+                create: "/product-category/create",
+                edit: "/product-category/edit/:id",
+                show: "/product-category/show/:id",
                 meta: {
                   canDelete: true,
                 },
@@ -90,13 +73,7 @@ function App() {
                   index
                   element={<NavigateToResource resource="blog_posts" />}
                 />
-                <Route path="/blog-posts">
-                  <Route index element={<BlogPostList />} />
-                  <Route path="create" element={<BlogPostCreate />} />
-                  <Route path="edit/:id" element={<BlogPostEdit />} />
-                  <Route path="show/:id" element={<BlogPostShow />} />
-                </Route>
-                <Route path="/categories">
+                <Route path="/product-category">
                   <Route index element={<CategoryList />} />
                   <Route path="create" element={<CategoryCreate />} />
                   <Route path="edit/:id" element={<CategoryEdit />} />
