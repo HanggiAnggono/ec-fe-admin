@@ -18,7 +18,7 @@ export const CategoryCreate = () => {
         <div>
           <button
             onClick={() => {
-              list("categories");
+              list("product-category");
             }}
           >
             List

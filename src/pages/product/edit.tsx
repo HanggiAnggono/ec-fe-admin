@@ -1,7 +1,7 @@
 import { useNavigation } from "@refinedev/core";
 import { useForm } from "@refinedev/react-hook-form";
 
-export const CategoryEdit = () => {
+export const ProductEdit = () => {
   const { list } = useNavigation();
 
   const {
@@ -18,7 +18,7 @@ export const CategoryEdit = () => {
         <div>
           <button
             onClick={() => {
-              list("categories");
+              list("product-edit");
             }}
           >
             List

@@ -1,9 +1,4 @@
-import {
-  Authenticated,
-  ErrorComponent,
-  GitHubBanner,
-  Refine,
-} from "@refinedev/core";
+import { Authenticated, ErrorComponent, Refine } from "@refinedev/core";
 import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 
@@ -27,7 +22,12 @@ import {
 import { ForgotPassword } from "./pages/forgotPassword";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
-import { ProductList } from "./pages/product";
+import {
+  ProductCreate,
+  ProductEdit,
+  ProductList,
+  ProductShow,
+} from "./pages/product";
 
 function App() {
   return (
@@ -92,9 +92,9 @@ function App() {
                 </Route>
                 <Route path="/products">
                   <Route index element={<ProductList />} />
-                  <Route path="create" element={<CategoryCreate />} />
-                  <Route path="edit/:id" element={<CategoryEdit />} />
-                  <Route path="show/:id" element={<CategoryShow />} />
+                  <Route path="create" element={<ProductCreate />} />
+                  <Route path="edit/:id" element={<ProductEdit />} />
+                  <Route path="show/:id" element={<ProductShow />} />
                 </Route>
                 <Route path="*" element={<ErrorComponent />} />
               </Route>

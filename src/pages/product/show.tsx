@@ -1,10 +1,10 @@
 import { useNavigation, useResource, useShow } from "@refinedev/core";
-import { IProductCategory } from "../../modules/products/dto";
+import { IProduct } from "../../modules/product/dto";
 
-export const CategoryShow = () => {
+export const ProductShow = () => {
   const { edit, list } = useNavigation();
   const { id } = useResource();
-  const { queryResult } = useShow<IProductCategory>({});
+  const { queryResult } = useShow<IProduct>({});
   const { data } = queryResult;
 
   const record = data?.data;
